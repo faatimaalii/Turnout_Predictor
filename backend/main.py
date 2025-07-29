@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 import pandas as pd
+import os
 
 app = FastAPI()
 
@@ -20,7 +21,11 @@ model_city = joblib.load("models/linreg_city_model.pkl")
 model_province = joblib.load("models/linreg_province_model.pkl")
 
 # Load clean dataset once
-df_clean = pd.read_csv("../data/cleaned_elections.csv")  # Adjust path if needed
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+csv_path = os.path.join(BASE_DIR, 'data', 'cleaned_elections.csv')
+
+df_clean = pd.read_csv(csv_path)
+
 
 df_clean['City'] = df_clean['City'].str.strip()
 df_clean['City'] = df_clean['City'].str.replace(r'\s+\d+$', '', regex=True).str.strip()
