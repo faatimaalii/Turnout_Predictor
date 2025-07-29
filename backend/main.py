@@ -21,11 +21,8 @@ model_city = joblib.load("models/linreg_city_model.pkl")
 model_province = joblib.load("models/linreg_province_model.pkl")
 
 # Load clean dataset once
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-csv_path = os.path.join(BASE_DIR, 'data', 'cleaned_elections.csv')
-
+csv_path = os.path.join(os.path.dirname(__file__), "data", "cleaned_elections.csv")
 df_clean = pd.read_csv(csv_path)
-
 
 df_clean['City'] = df_clean['City'].str.strip()
 df_clean['City'] = df_clean['City'].str.replace(r'\s+\d+$', '', regex=True).str.strip()
