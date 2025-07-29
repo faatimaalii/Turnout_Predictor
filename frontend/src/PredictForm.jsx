@@ -17,7 +17,8 @@ const PredictForm = () => {
 
   // Fetch locations (cities + provinces)
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/locations')
+    axios.get('https://turnoutpredictor-production.up.railway.app/locations')
+
       .then((res) => {
         setLocations(res.data);
       })
@@ -43,7 +44,8 @@ const PredictForm = () => {
         voters: parseInt(form.voters),
       };
 
-      const res = await axios.post('http://127.0.0.1:8000/predict', payload);
+      const res = await axios.post('https://turnoutpredictor-production.up.railway.app/predict', payload);
+
       setResult(res.data);
     } catch (err) {
       console.error(err.response?.data || err.message);
